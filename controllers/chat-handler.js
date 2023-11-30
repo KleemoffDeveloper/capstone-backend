@@ -8,7 +8,7 @@ const openai = new OpenAI({ apiKey: process.env.API_KEY });
 const chat_handler = express.Router();
 chat_handler.use(express.json());
 
-chat_handler.get("/stream", async (req, res) => {
+chat_handler.post("/stream", async (req, res) => {
   try {
     const messages = req.body;
 
