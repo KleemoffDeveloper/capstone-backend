@@ -25,7 +25,7 @@ chat_handler.post("/stream", async (req, res) => {
 
     // Handle OpenAI stream
     for await (const chunk of response) {
-      res.write(chunk);
+      res.write(JSON.stringify(chunk));
     }
     res.end();
   } catch (error) {
