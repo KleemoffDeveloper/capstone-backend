@@ -1,9 +1,11 @@
-const express = require("express");
-const chat_handler = express.Router();
-const OpenAI = require("openai");
+import express from "express";
+import OpenAI from "openai";
+import dotenv from "dotenv";
+dotenv.config();
 
 const openai = new OpenAI({ apiKey: process.env.API_KEY });
 
+const chat_handler = express.Router();
 chat_handler.use(express.json());
 
 chat_handler.get("/stream", async (req, res) => {
@@ -32,4 +34,4 @@ chat_handler.get("/stream", async (req, res) => {
   }
 });
 
-module.exports = chat_handler;
+export default chat_handler;

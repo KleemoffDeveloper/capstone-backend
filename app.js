@@ -1,7 +1,9 @@
 // DEPENDENCIES
-require("dotenv").config();
-const cors = require("cors");
-const express = require("express");
+import dotenv from "dotenv";
+import cors from "cors";
+
+dotenv.config();
+import express from "express";
 
 // CONFIGURATION
 const app = express();
@@ -15,7 +17,7 @@ app.get("/", async (req, res) => {
 });
 
 // CONTROLLERS
-const chat_handler = require("./controllers/chat-handler.js");
+import chat_handler from "./controllers/chat-handler.js";
 app.use(chat_handler);
 
 // 404 PAGE
@@ -24,4 +26,4 @@ app.get("*", (req, res) => {
 });
 
 // EXPORT
-module.exports = app;
+export default app;
