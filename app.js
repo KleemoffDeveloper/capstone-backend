@@ -14,6 +14,10 @@ app.get("/", async (req, res) => {
   res.send({ response: true });
 });
 
+// CONTROLLERS
+const chat_handler = require("./controllers/chat-handler.js");
+app.use(chat_handler);
+
 // 404 PAGE
 app.get("*", (req, res) => {
   res.status(404).send("Page not found");
