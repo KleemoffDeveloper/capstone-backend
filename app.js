@@ -1,31 +1,22 @@
 // DEPENDENCIES
-import dotenv from "dotenv";
-import cors from "cors";
-
-dotenv.config();
 import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
 
 // CONFIGURATION
 const app = express();
 
 // MIDDLEWARE
-// app.use(
-//   cors({
-//     origin: "https://pathfinder-game.netlify.app/",
-//   })
-// );
-
 app.use(cors());
-
-app.use(express.json());
-
-app.get("/", async (req, res) => {
-  res.send({ response: true });
-});
 
 // CONTROLLERS
 import chat_handler from "./controllers/chat-handler.js";
 app.use(chat_handler);
+
+app.get("/", (req, res) => {
+  res.send({ response: true });
+});
 
 // 404 PAGE
 app.get("*", (req, res) => {

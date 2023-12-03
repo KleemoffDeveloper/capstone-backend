@@ -5,27 +5,22 @@ dotenv.config();
 
 const openai = new OpenAI({ apiKey: process.env.API_KEY });
 
-const chat_handler = express.Router();
-chat_handler.use(express.json());
+const chat_handler = express();
 
 chat_handler.post("/response", async (req, res) => {
-  try {
-    const messages = req.body;
+  const messages = req.body;
+  const temperature = 0.8;
+  const model = "gpt-3.5-turbo-16k";
 
-    const temperature = 0.6;
-    const model = "gpt-3.5-turbo-16k";
+  // Send to OpenAI API
+  const response = await openai.chat.completions.create({
+    messages: messages,
+    temperature: temperature,
+    model: model,
+  });
 
-    // Send to OpenAI API
-    const response = await openai.chat.completions.create({
-      messages: messages,
-      temperature: temperature,
-      model: model,
-    });
-
-    res.send(response);
-  } catch (error) {
-    res.status(500).send({ error: error.message });
-  }
+  if (response.error) res.status(500).send({ error: response });
+  else res.send(response);
 });
 
 export default chat_handler;
