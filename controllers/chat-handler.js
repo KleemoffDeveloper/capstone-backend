@@ -6,6 +6,7 @@ dotenv.config();
 const openai = new OpenAI({ apiKey: process.env.API_KEY });
 
 const chat_handler = express();
+chat_handler.use(express.json());
 
 chat_handler.post("/response", async (req, res) => {
   const messages = req.body;
