@@ -8,7 +8,7 @@ const openai = new OpenAI({ apiKey: process.env.API_KEY });
 const chat_handler = express.Router();
 chat_handler.use(express.json());
 
-chat_handler.post("/stream", async (req, res) => {
+chat_handler.post("/response", async (req, res) => {
   try {
     const messages = req.body;
 
@@ -20,17 +20,11 @@ chat_handler.post("/stream", async (req, res) => {
       messages: messages,
       temperature: temperature,
       model: model,
-      stream: true,
     });
 
-    // Handle OpenAI stream
-    for await (const chunk of response) {
-      res.write(JSON.stringify(chunk));
-    }
-    res.end();
+    res.send(response);
   } catch (error) {
-    res.status(500).write(JSON.stringify({ error: error.message }));
-    res.end();
+    res.status(500).send({ error: error.message });
   }
 });
 

@@ -9,7 +9,14 @@ import express from "express";
 const app = express();
 
 // MIDDLEWARE
+// app.use(
+//   cors({
+//     origin: "https://pathfinder-game.netlify.app/",
+//   })
+// );
+
 app.use(cors());
+
 app.use(express.json());
 
 app.get("/", async (req, res) => {
