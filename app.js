@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 
 // MIDDLEWARE
-app.use(cors());
+app.use(cors({origin:true}));
 
 // CONTROLLERS
 import chat_handler from "./controllers/chat-handler.js";
