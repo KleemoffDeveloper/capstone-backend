@@ -10,6 +10,7 @@ image_handler.use(express.json());
 
 image_handler.post("/image", async (req, res) => {
   try {
+    console.log(13,"image request.");
     let m_prompt = req.body.content;
     const imageResponse = await openai.images.generate({
       model: "dall-e-3",

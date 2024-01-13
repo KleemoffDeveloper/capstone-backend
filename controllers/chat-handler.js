@@ -10,6 +10,7 @@ chat_handler.use(express.json());
 
 chat_handler.post("/response", async (req, res) => {
   try {
+    console.log(13,"text request.");
     const messages = req.body;
     // Send to OpenAI API
     const response = await openai.chat.completions.create({
